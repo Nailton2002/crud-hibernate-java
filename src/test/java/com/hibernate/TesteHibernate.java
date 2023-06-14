@@ -22,14 +22,23 @@ public class TesteHibernate {
 	public void deveSalvarUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = new Pessoa();
-
 		obj.setIdade(38);
 		obj.setLogin("teste");
 		obj.setNome("Nailton");
 		obj.setSenha("123");
 		obj.setSobrenome("Mendes");
-
 		daoGeneric.salvar(obj);
+	}
+
+	@Test
+	public void deveAtualizarUmaEntidadeGenerica() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		Pessoa obj = daoGeneric.listaPorId(1L, Pessoa.class);
+		obj.setIdade(38);
+		obj.setNome("José Nailton");
+		obj.setSenha("admin");
+		obj = daoGeneric.atualizar(obj);
+		System.out.println(obj);
 	}
 
 	@Test
@@ -46,6 +55,5 @@ public class TesteHibernate {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = daoGeneric.listaPorId(1L, Pessoa.class);
 		System.out.println(obj);
-
 	}
 }
