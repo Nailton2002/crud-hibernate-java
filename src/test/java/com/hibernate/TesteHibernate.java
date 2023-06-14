@@ -16,7 +16,10 @@ public class TesteHibernate {
 	@Test
 	public void testeHibernateUtil() {
 		HibernateUtil.geEntityManager();
+	}
 
+	@Test
+	public void salvar() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = new Pessoa();
 
@@ -27,5 +30,14 @@ public class TesteHibernate {
 		obj.setSobrenome("Mendes");
 
 		daoGeneric.salvar(obj);
+	}
+
+	@Test
+	public void ListarPorId() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		Pessoa obj = new Pessoa();
+		obj.setId(1L);
+		obj = daoGeneric.pesquisar(obj);
+		System.out.println(obj);
 	}
 }
