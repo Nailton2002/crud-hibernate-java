@@ -16,9 +16,16 @@ public class DaoGeneric <EntidadeGeneric>{
         transaction.commit();
     }
 
-    public EntidadeGeneric pesquisar(EntidadeGeneric entity) {
+    public EntidadeGeneric buscarPorId(EntidadeGeneric entity) {
         Object id = HibernateUtil.getPrimaryKey(entity);
         EntidadeGeneric obj = (EntidadeGeneric) entityManager.find(entity.getClass(), id);
+        return obj;
+
+    }
+    public EntidadeGeneric listaPorId(Long id, Class<EntidadeGeneric> entidade) {
+        entityManager.clear();
+        EntidadeGeneric obj = (EntidadeGeneric) entityManager.createQuery(
+"from " + entidade.getSimpleName() + " where id = " + id).getSingleResult();
         return obj;
 
     }

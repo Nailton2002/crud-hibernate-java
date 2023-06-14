@@ -19,7 +19,7 @@ public class TesteHibernate {
 	}
 
 	@Test
-	public void salvar() {
+	public void deveSalvarUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = new Pessoa();
 
@@ -33,11 +33,19 @@ public class TesteHibernate {
 	}
 
 	@Test
-	public void ListarPorId() {
+	public void deveListarPorIdUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = new Pessoa();
 		obj.setId(1L);
-		obj = daoGeneric.pesquisar(obj);
+		obj = daoGeneric.buscarPorId(obj);
 		System.out.println(obj);
+	}
+
+	@Test
+	public void deveBuscarPorIdEntidadeGenerica() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		Pessoa obj = daoGeneric.listaPorId(1L, Pessoa.class);
+		System.out.println(obj);
+
 	}
 }
