@@ -23,37 +23,59 @@ public class TesteHibernate {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = new Pessoa();
 		obj.setIdade(38);
-		obj.setLogin("teste");
 		obj.setNome("Nailton");
-		obj.setSenha("123");
 		obj.setSobrenome("Mendes");
+		obj.setLogin("admin");
+		obj.setSenha("123");
+		obj.setSexo("Masculino");
+		obj.setSenha("123");
+		obj.setSalario(5.72500);
 		daoGeneric.salvar(obj);
 	}
 
 	@Test
-	public void deveAtualizarUmaEntidadeGenerica() {
+	public void deveListarTodosEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
-		Pessoa obj = daoGeneric.listaPorId(1L, Pessoa.class);
-		obj.setIdade(38);
-		obj.setNome("José Nailton");
-		obj.setSenha("admin");
-		obj = daoGeneric.atualizar(obj);
-		System.out.println(obj);
+		List<Pessoa> list = daoGeneric.listarTodos(Pessoa.class);
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+			System.out.println("====================================================================================");
+		}
 	}
-
 	@Test
 	public void deveListarPorIdUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		Pessoa obj = new Pessoa();
 		obj.setId(1L);
-		obj = daoGeneric.buscarPorId(obj);
+		obj = daoGeneric.listaPorId(obj);
 		System.out.println(obj);
 	}
 
 	@Test
 	public void deveBuscarPorIdEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
-		Pessoa obj = daoGeneric.listaPorId(1L, Pessoa.class);
+		Pessoa obj = daoGeneric.buscarPorId(2L, Pessoa.class);
 		System.out.println(obj);
+	}
+
+	@Test
+	public void deveAtualizarUmaEntidadeGenerica() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		Pessoa obj = daoGeneric.buscarPorId(1L, Pessoa.class);
+		obj.setIdade(38);
+		obj.setNome("José Nailton");
+		obj.setSenha("admin");
+		obj = daoGeneric.atualizar(obj);
+		System.out.println(obj);
+	}
+	@Test
+	public void deveDeletarUmaEntidadeGenerica() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		Pessoa obj = daoGeneric.buscarPorId(1L, Pessoa.class);
+		try {
+			daoGeneric.deletarPoId(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
