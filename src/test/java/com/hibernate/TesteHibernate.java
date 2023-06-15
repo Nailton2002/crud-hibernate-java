@@ -150,4 +150,14 @@ public class TesteHibernate {
 		System.out.println("Soma de todas as idades é --> " + somaIdade);
 	}
 
+	@Test
+	public void deveBuscarMediaTodasIdadeNoBancoDados() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		Double somaIdade = (Double) daoGeneric.getEntityManager()
+		.createQuery("select avg(p.idade) from Pessoa p ")
+		.getSingleResult();
+		System.out.println("Média de todas as idades é --> " + somaIdade);
+
+	}
+
 }
