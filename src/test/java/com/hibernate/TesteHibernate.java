@@ -42,40 +42,54 @@ public class TesteHibernate {
 			System.out.println("====================================================================================");
 		}
 	}
+
 	@Test
 	public void deveListarPorIdUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
-		Pessoa obj = new Pessoa();
-		obj.setId(1L);
-		obj = daoGeneric.listaPorId(obj);
+		Pessoa obj = daoGeneric.listaPorId(2L, Pessoa.class);
 		System.out.println(obj);
 	}
 
 	@Test
-	public void deveBuscarPorIdEntidadeGenerica() {
+	public void deveBuscarPorIdEntidadeGenerica () {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
-		Pessoa obj = daoGeneric.buscarPorId(2L, Pessoa.class);
+		Pessoa obj = new Pessoa();
+		obj.setId(2L);
+		obj = daoGeneric.buscarPorId (obj);
 		System.out.println(obj);
 	}
 
 	@Test
 	public void deveAtualizarUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
-		Pessoa obj = daoGeneric.buscarPorId(1L, Pessoa.class);
+		Pessoa obj = daoGeneric.listaPorId(2L, Pessoa.class);
 		obj.setIdade(38);
-		obj.setNome("José Nailton");
+		obj.setNome("Jose");
 		obj.setSenha("admin");
 		obj = daoGeneric.atualizar(obj);
 		System.out.println(obj);
 	}
+
 	@Test
 	public void deveDeletarUmaEntidadeGenerica() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
-		Pessoa obj = daoGeneric.buscarPorId(1L, Pessoa.class);
+		Pessoa obj = daoGeneric.listaPorId(1L, Pessoa.class);
 		try {
 			daoGeneric.deletarPoId(obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void deveBuscarPorNome() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		List<Pessoa> list = daoGeneric.getEntityManager().createQuery(" from Pessoa where nome = 'Jose'")
+		.getResultList();
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+		}
+	}
+
+
 }
