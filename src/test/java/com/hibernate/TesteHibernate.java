@@ -128,4 +128,17 @@ public class TesteHibernate {
 		}
 	}
 
+	@Test
+	public void deveBuscarPorNomeESobreNomePassandoParametro() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		List<Pessoa> list = daoGeneric.getEntityManager()
+		.createQuery("from Pessoa where nome = :nome and sobrenome = :sobrenome")
+		.setParameter("nome", "Jose")
+		.setParameter("sobrenome", "Mendes")
+		.getResultList();
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+		}
+	}
+
 }
