@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 
 import com.hibernate.dao.DaoGeneric;
 import com.hibernate.model.Pessoa;
+import com.hibernate.model.Telefone;
 import org.junit.Test;
 
 public class TesteHibernate {
@@ -178,5 +179,33 @@ public class TesteHibernate {
 			System.out.println(obj);
 		}
 	}
+
+	@Test
+	public void deveSalvarTelefoneRelacionadoPessoa(){
+		DaoGeneric daoGeneric = new DaoGeneric();
+		Pessoa pessoa =  (Pessoa) daoGeneric.listaPorId(3L, Pessoa.class);
+		Telefone fone = new Telefone();
+		fone.setTipo("Celular");
+		fone.setNumero("81 998582533");
+		fone.setPessoa(pessoa);
+		daoGeneric.salvar(fone);
+		System.out.println(pessoa);
+		System.out.println("==================================================================================");
+		System.out.println(fone);
+	}
+
+	@Test
+	public void deveBuscarTelefonesRelacionadoPessoa(){
+		DaoGeneric daoGeneric = new DaoGeneric();
+		Pessoa pessoa =  (Pessoa) daoGeneric.listaPorId(3L, Pessoa.class);
+		for (Telefone fone : pessoa.getTelefone()) {
+			System.out.println(fone.getNumero());
+			System.out.println(fone.getTipo());
+			System.out.println(fone.getPessoa().getNome());
+			System.out.println("----------------------------------");
+		}
+
+	}
+
 
 }
