@@ -169,4 +169,14 @@ public class TesteHibernate {
 		}
 	}
 
+	@Test
+	public void deveBuscarPorNomeComQueryEspecifica() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		List<Pessoa> list = daoGeneric.getEntityManager().createNamedQuery("Pessoa.buscaPorNome")
+		.setParameter("nome", "Jose").getResultList();
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+		}
+	}
+
 }

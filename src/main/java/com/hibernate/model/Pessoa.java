@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "Pessoa.buscarTodos" , query = "select p from Pessoa p"),
-               @NamedQuery(name = "Pessoa.buscaPorNome", query = "select p from Pessoa p where u.nome = :nome") })
+               @NamedQuery(name = "Pessoa.buscaPorNome", query = "select p from Pessoa p where p.nome = :nome") })
 public class Pessoa {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
