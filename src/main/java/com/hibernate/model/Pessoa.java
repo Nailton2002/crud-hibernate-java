@@ -1,11 +1,10 @@
 package com.hibernate.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@NamedQueries({@NamedQuery(name = "Pessoa.buscarTodos" , query = "select p from Pessoa p"),
+               @NamedQuery(name = "Pessoa.buscaPorNome", query = "select p from Pessoa p where u.nome = :nome") })
 public class Pessoa {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

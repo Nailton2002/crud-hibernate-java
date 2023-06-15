@@ -160,4 +160,13 @@ public class TesteHibernate {
 
 	}
 
+	@Test
+	public void deveBuscarTodosComQueryEspecifica() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		List<Pessoa> list = daoGeneric.getEntityManager().createNamedQuery("Pessoa.buscarTodos").getResultList();
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+		}
+	}
+
 }
