@@ -1,6 +1,8 @@
 package com.hibernate.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "Pessoa.buscarTodos" , query = "select p from Pessoa p"),
@@ -17,13 +19,8 @@ public class Pessoa {
     private int idade;
     private Double salario;
 
-    public void setSalario(Double salario) {
-        this.salario = salario;
-    }
-
-    public Double getSalario() {
-        return salario;
-    }
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Telefone> telefone = new ArrayList<Telefone>();
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
@@ -80,6 +77,18 @@ public class Pessoa {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public void setSalario(Double salario) {
+        this.salario = salario;
+    }
+
+    public Double getSalario() {
+        return salario;
+    }
+
+    public List<Telefone> getTelefone() {return telefone;}
+
+    public void setTelefone(List<Telefone> telefone) {this.telefone = telefone;}
 
     @Override
     public String toString() {

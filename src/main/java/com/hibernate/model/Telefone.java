@@ -1,6 +1,7 @@
 package com.hibernate.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Telefone {
@@ -13,6 +14,8 @@ public class Telefone {
     private String numero;
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
+
+    public Telefone() {}
 
     public Long getId() {return id;}
 
@@ -29,4 +32,27 @@ public class Telefone {
     public Pessoa getPessoa() {return pessoa;}
 
     public void setPessoa(Pessoa pessoa) {this.pessoa = pessoa;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Telefone)) return false;
+        Telefone telefone = (Telefone) o;
+        return Objects.equals(getId(), telefone.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Telefone{" +
+                "id=" + id +
+                ", tipo='" + tipo + '\'' +
+                ", numero='" + numero + '\'' +
+                ", pessoa=" + pessoa +
+                '}';
+    }
 }
