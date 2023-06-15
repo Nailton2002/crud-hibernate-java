@@ -91,5 +91,15 @@ public class TesteHibernate {
 		}
 	}
 
+	@Test
+	public void deveBuscarMaxResultadoPorNome() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		List<Pessoa> list = daoGeneric.getEntityManager().createQuery(" from Pessoa order by nome")
+		.setMaxResults(2).getResultList();
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+		}
+
+	}
 
 }
