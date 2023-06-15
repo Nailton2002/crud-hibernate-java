@@ -91,7 +91,9 @@ public class TesteHibernate {
 		}
 	}
 
+
 	@Test
+	//Esta busca é igual a uma buscar página no spring boot
 	public void deveBuscarMaxResultadoPorNome() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		List<Pessoa> list = daoGeneric.getEntityManager().createQuery(" from Pessoa order by nome")
@@ -101,11 +103,26 @@ public class TesteHibernate {
 		}
 	}
 
+
 	@Test
+	//Esta busca é igual a uma buscar página no spring boot
 	public void deveBuscarMaxResultadoPorId() {
 		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 		List<Pessoa> list = daoGeneric.getEntityManager().createQuery(" from Pessoa order by id")
 		.setMaxResults(2).getResultList();
+		for (Pessoa obj : list) {
+			System.out.println(obj);
+		}
+	}
+
+	@Test
+	public void deveBuscarPorNomeOuSobreNomePassandoParametro() {
+		DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+		List<Pessoa> list = daoGeneric.getEntityManager()
+		.createQuery("from Pessoa where nome = :nome or sobrenome = :sobrenome")
+		.setParameter("nome", "Jose")
+		.setParameter("sobrenome", "Nailton")
+		.getResultList();
 		for (Pessoa obj : list) {
 			System.out.println(obj);
 		}
